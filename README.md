@@ -1,0 +1,1 @@
+This is an ecommerce web app that uses node.js, express, react, redux, and other fun stuff. 
