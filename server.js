@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { Pool } = require('pg');
+const dbConnect = require('./config/db_connection');
 
 const app = express();
 
@@ -10,10 +11,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //connect to postgres
-const connectionString = '';
-const pool = new Pool({
-    connectionString: connectionString
-});
+dbConnect();
+
+//use routes
+app.use('/api/ebooks', require('./routes/api/ebooks'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`));

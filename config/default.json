@@ -1,0 +1,3 @@
+{
+    "pgURI": "postgresql://postgres:root@localhost:5432/ebookstore"
+}
