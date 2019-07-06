@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { GET_EBOOKS, ADD_EBOOK, DELETE_EBOOKS, UPDATE_EBOOKS, EBOOKS_LOADING } from '../actions/types';
+import { GET_EBOOKS, ADD_EBOOK, DELETE_EBOOK, UPDATE_EBOOK, EBOOKS_LOADING } from '../actions/types';
 
 export const getEBooks = () => dispatch => {
-    dispatch(setEBooksLoading);
+    dispatch(setEBooksLoading());
     axios
         .get('/api/ebooks')
         .then(res =>

@@ -1,4 +1,4 @@
-import { GET_EBOOKS, ADD_EBOOK, DELETE_EBOOKS, UPDATE_EBOOKS, EBOOKS_LOADING } from '../actions/types';
+import { GET_EBOOKS, ADD_EBOOK, DELETE_EBOOK, UPDATE_EBOOK, EBOOKS_LOADING } from '../actions/types';
 
 const initialState = {
     eBooks: [],
@@ -18,12 +18,12 @@ export default function (state = initialState, action) {
                 ...state,
                 eBooks: [action.payload, ...state.eBooks]
             }
-        case DELETE_EBOOKS:
+        case DELETE_EBOOK:
             return {
                 ...state,
                 eBooks: state.eBooks.filter(eBook => eBook.id !== action.payload)
             }
-        case UPDATE_EBOOKS:
+        case UPDATE_EBOOK:
             return {
                 ...state,
                 eBook: [action.payload, ...state.eBooks]
