@@ -13,8 +13,7 @@ router.get('/', (req, res) => {
         if (err) {
             console.log(err);
         }
-        const results = result.rows;
-        res.json({ results });
+        res.json(result.rows);
     })
 });
 
