@@ -5,7 +5,6 @@ export class Home extends Component {
     render() {
         return (
             <div>
-                <h1>hi this the home page</h1>
                 <EBookList />
             </div>
         )

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Home from './components/pages/Home';
+import TopNav from './components/TopNav';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -13,6 +14,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App" >
+          <TopNav />
           <Router>
             <Route exact path='/' component={Home} />
           </Router>
