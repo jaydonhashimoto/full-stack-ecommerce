@@ -6,6 +6,7 @@ import {
     NavItem,
     NavLink
 } from 'reactstrap';
+import AddEBookModal from './AddEBookModal';
 
 export class TopNav extends Component {
     render() {
@@ -15,7 +16,7 @@ export class TopNav extends Component {
                     <NavbarBrand href='/' style={navLinkStyle}>Fake eBook Store</NavbarBrand>
                     <Nav className="ml-auto">
                         <NavItem >
-                            <NavLink href='#' style={navLinkStyle}>Add eBook</NavLink>
+                            <AddEBookModal />
                         </NavItem>
                         <NavItem>
                             <NavLink href='#' style={navLinkStyle}>Sign In</NavLink>

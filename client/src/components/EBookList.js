@@ -27,7 +27,7 @@ export class EBookList extends Component {
                     <Row>
                         {eBooks.map(({ id, title, description, img, author, date_added }) => (
                             <Col >
-                                <Link style={linkStyle}>
+                                <Link style={linkStyle} to='#'>
                                     <Card>
                                         <CardImg top width="100%" src={imgSrc + img} alt={title} />
                                         <CardBody>
