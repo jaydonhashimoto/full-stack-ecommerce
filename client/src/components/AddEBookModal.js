@@ -37,6 +37,10 @@ export class AddEBookModal extends Component {
                                 <Input type="text" name="author" placeholder="Author" />
                             </FormGroup>
                             <FormGroup>
+                                <Label for="price">Price</Label>
+                                <Input type="text" name="price" placeholder="00.00" />
+                            </FormGroup>
+                            <FormGroup>
                                 <Label for="img">Cover Image</Label>
                                 <Input type="file" name="img" />
                             </FormGroup>
