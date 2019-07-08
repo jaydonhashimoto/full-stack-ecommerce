@@ -29,7 +29,12 @@ export class EBookList extends Component {
                             <Col >
                                 <Link style={linkStyle} to='#'>
                                     <Card>
-                                        <CardImg top width="100%" src={imgSrc + img} alt={title} />
+                                        {img !== null ? (
+                                            <CardImg top width="100%" src={imgSrc + img} alt={title} />
+                                        ) : (
+                                                <CardImg top width="100%" src={imgSrc + 'notfound.png'} alt={title} />
+                                            )
+                                        }
                                         <CardBody>
                                             <CardTitle><b>{title}</b></CardTitle>
                                             <CardSubtitle><small>{author}</small></CardSubtitle>

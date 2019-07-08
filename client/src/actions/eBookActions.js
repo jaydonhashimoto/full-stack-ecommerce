@@ -17,6 +17,29 @@ export const getEBooks = () => dispatch => {
         });
 }
 
+export const addEBook = (eBook) => (dispatch) => {
+    console.log(eBook);
+    axios
+        .post('/api/ebooks', {
+            title: eBook.title,
+            description: eBook.description,
+            author: eBook.author,
+            img: eBook.img,
+            price: eBook.price,
+            date_added: eBook.date_added
+        })
+        .then(res =>
+            dispatch({
+                type: ADD_EBOOK,
+                payload: res.data
+            })
+        )
+        .catch(err => {
+            console.log(err);
+            // dispatch(returnErrors(err.response.data, err.response.status))
+        });
+};
+
 export const setEBooksLoading = () => {
     return {
         type: EBOOKS_LOADING
