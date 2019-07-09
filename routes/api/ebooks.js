@@ -36,6 +36,32 @@ router.post('/', (req, res) => {
 });
 
 /**
+ * @route POST api/ebooks/img
+ * @desc add an img
+ * @access private
+ */
+router.post('/uploadimg', (req, res) => {
+    if (req.files === null) {
+        return res.status(400).json({ msg: 'No file uploaded' });
+    }
+    //get file
+    const file = req.files.file;
+
+    //move file to directory
+    file.mv(`${__dirname}/../../client/public/images/${file.name}`, err => {
+        //if there is an error, send 500 with error
+        if (err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
+        //else send 200 with file name and path
+        res.json({ fileName: file.name, filePath: `/images/${file.name}` });
+    })
+
+
+});
+
+/**
  * @route UPDATE api/ebooks/edit
  * @desc edit an ebook
  * @access private

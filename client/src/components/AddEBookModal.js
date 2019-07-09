@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, NavLink, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addEBook } from '../actions/eBookActions';
+import FileForm from '../components/FileUpload/FileForm';
 import PropTypes from 'prop-types';
 
 export class AddEBookModal extends Component {
@@ -9,7 +10,8 @@ export class AddEBookModal extends Component {
         super(props);
         this.state = {
             modal: false,
-            eBook: {}
+            eBook: {},
+            imgName: ''
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -18,6 +20,10 @@ export class AddEBookModal extends Component {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
+    }
+
+    setImgName = (name) => {
+        this.setState({ imgName: name });
     }
 
     onChange = (e) => {
@@ -41,7 +47,7 @@ export class AddEBookModal extends Component {
             author: this.state.eBook.author,
             price: this.state.eBook.price,
             date_added: today,
-            img: null
+            img: this.state.imgName
         }
 
         this.props.addEBook(newEBook);
@@ -55,6 +61,8 @@ export class AddEBookModal extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader>Add eBook</ModalHeader>
                     <ModalBody>
+                        <FileForm setImgName={this.setImgName} />
+                        <hr />
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
                                 <Label for="title">Title</Label>
@@ -72,10 +80,7 @@ export class AddEBookModal extends Component {
                                 <Label for="price">Price</Label>
                                 <Input type="text" name="price" placeholder="00.00" onChange={this.onChange} />
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="img">Cover Image</Label>
-                                <Input type="file" name="img" onChange={this.onChange} />
-                            </FormGroup>
+                            <hr />
                             <Button color="primary">Add</Button>{' '}
                             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         </Form>

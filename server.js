@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
-const { Pool } = require('pg');
+const fileUpload = require('express-fileupload');
 const dbConnect = require('./config/db_connection');
 
 const app = express();
+
+app.use(fileUpload());
 
 //bodyParser middleware
 app.use(express.json());

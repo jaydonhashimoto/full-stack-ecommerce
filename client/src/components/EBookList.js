@@ -24,9 +24,9 @@ export class EBookList extends Component {
         return (
             <div>
                 <Container>
-                    <Row>
+                    <Row className="mt-4 mb-4">
                         {eBooks.map(({ id, title, description, img, author, date_added }) => (
-                            <Col >
+                            <Col md="3" lg="3">
                                 <Link style={linkStyle} to='#'>
                                     <Card>
                                         {img !== null ? (
