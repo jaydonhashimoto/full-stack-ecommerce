@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import {
-    Container, Row, Col, Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle
+    Container, Row, Col, Card, CardImg, CardBody,
+    CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEBooks } from '../actions/eBookActions';
+import { getEBooks, deleteEBook } from '../actions/eBookActions';
 import PropTypes from 'prop-types';
 
 export class EBookList extends Component {
     static propTypes = {
         getEBooks: PropTypes.func.isRequired,
+        deleteEBook: PropTypes.func.isRequired,
         eBook: PropTypes.object.isRequired
     };
 
     componentDidMount() {
         this.props.getEBooks();
+    }
+
+    deleteEBook = (id, img) => {
+        this.props.deleteEBook(id, img);
     }
 
     render() {
@@ -38,7 +43,7 @@ export class EBookList extends Component {
                                         <CardBody>
                                             <CardTitle><b>{title}</b></CardTitle>
                                             <CardSubtitle><small>{author}</small></CardSubtitle>
-                                            {/* <CardText>{description}</CardText> */}
+                                            <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
                                         </CardBody>
                                     </Card>
                                 </Link>
@@ -60,4 +65,4 @@ const mapStateToProps = (state) => ({
     eBook: state.eBook
 });
 
-export default connect(mapStateToProps, { getEBooks })(EBookList);
+export default connect(mapStateToProps, { getEBooks, deleteEBook })(EBookList);

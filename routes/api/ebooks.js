@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const router = express.Router();
 const dbConnect = require('../../config/db_connection');
 const pool = dbConnect();
@@ -84,8 +86,19 @@ router.post('/edit', (req, res) => {
  * @desc delete an ebook
  * @access private
  */
-router.delete('/delete', (req, res) => {
-    const { id } = req.body;
+router.post('/delete', (req, res) => {
+    const { id, img } = req.body;
+
+    if (img !== null) {
+        //delete img 
+        const directory = path.join('client/public/images', img.trim());
+        fs.unlink(directory, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
     pool.query(
         'DELETE FROM ebooks WHERE id = $1',
         [id],
@@ -94,7 +107,8 @@ router.delete('/delete', (req, res) => {
                 console.log(err);
             }
             res.json({ result });
-        })
+        }
+    )
 });
 
 module.exports = router;

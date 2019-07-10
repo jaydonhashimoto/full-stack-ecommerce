@@ -18,7 +18,6 @@ export const getEBooks = () => dispatch => {
 }
 
 export const addEBook = (eBook) => (dispatch) => {
-    console.log(eBook);
     axios
         .post('/api/ebooks', {
             title: eBook.title,
@@ -39,6 +38,23 @@ export const addEBook = (eBook) => (dispatch) => {
             // dispatch(returnErrors(err.response.data, err.response.status))
         });
 };
+
+export const deleteEBook = (id, img) => (dispatch) => {
+    axios
+        .post('/api/ebooks/delete', {
+            id: id,
+            img: img
+        })
+        .then(res => {
+            dispatch({
+                type: DELETE_EBOOK,
+                payload: id
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 export const setEBooksLoading = () => {
     return {
