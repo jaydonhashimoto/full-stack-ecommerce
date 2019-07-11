@@ -5,13 +5,19 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEBooks, deleteEBook } from '../actions/eBookActions';
+import { getEBooks, deleteEBook, updateEBook } from '../actions/eBookActions';
 import PropTypes from 'prop-types';
+import UpdateEBookModal from '../components/UpdateEBookModal';
 
 export class EBookList extends Component {
+    state = {
+        ebook: {}
+    }
+
     static propTypes = {
         getEBooks: PropTypes.func.isRequired,
         deleteEBook: PropTypes.func.isRequired,
+        updateEBook: PropTypes.func.isRequired,
         eBook: PropTypes.object.isRequired
     };
 
@@ -23,6 +29,10 @@ export class EBookList extends Component {
         this.props.deleteEBook(id, img);
     }
 
+    updateEBook = (ebook) => {
+        this.props.updateEBook(ebook);
+    }
+
     render() {
         const { eBooks } = this.props.eBook;
         let imgSrc = '/images/';
@@ -30,7 +40,7 @@ export class EBookList extends Component {
             <div>
                 <Container>
                     <Row className="mt-4 mb-4">
-                        {eBooks.map(({ id, title, description, img, author, date_added }) => (
+                        {eBooks.map(({ id, title, description, img, author, price, date_added }) => (
                             <Col md="3" lg="3">
                                 <Link style={linkStyle} to='#'>
                                     <Card>
@@ -44,6 +54,14 @@ export class EBookList extends Component {
                                             <CardTitle><b>{title}</b></CardTitle>
                                             <CardSubtitle><small>{author}</small></CardSubtitle>
                                             <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
+                                            <UpdateEBookModal
+                                                id={id}
+                                                title={title}
+                                                description={description}
+                                                img={img}
+                                                price={price}
+                                                author={author}
+                                            />
                                         </CardBody>
                                     </Card>
                                 </Link>
@@ -65,4 +83,4 @@ const mapStateToProps = (state) => ({
     eBook: state.eBook
 });
 
-export default connect(mapStateToProps, { getEBooks, deleteEBook })(EBookList);
+export default connect(mapStateToProps, { getEBooks, deleteEBook, updateEBook })(EBookList);

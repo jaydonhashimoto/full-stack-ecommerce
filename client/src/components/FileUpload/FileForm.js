@@ -1,14 +1,20 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Message from './Message';
 import Progress from './Progress';
 import axios from 'axios';
 
-const FileForm = ({ setImgName }) => {
+const FileForm = ({ setImgName, imgName }) => {
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('Choose File');
     const [uploadedFile, setUploadedFile] = useState({});
     const [msg, setMsg] = useState('');
     const [uploadPercentage, setUploadPercentage] = useState(0);
+
+    useEffect(() => {
+        if (imgName) {
+            setFilename(imgName);
+        }
+    })
 
     const onChange = e => {
         //file upload allows for multiple files

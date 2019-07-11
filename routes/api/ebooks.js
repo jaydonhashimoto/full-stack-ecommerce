@@ -59,8 +59,6 @@ router.post('/uploadimg', (req, res) => {
         //else send 200 with file name and path
         res.json({ fileName: file.name, filePath: `/images/${file.name}` });
     })
-
-
 });
 
 /**
@@ -69,10 +67,22 @@ router.post('/uploadimg', (req, res) => {
  * @access private
  */
 router.post('/edit', (req, res) => {
-    const { title, description, author, price, date_added, id } = req.body;
+    const { title, description, author, price, id, img, oldImgName } = req.body.ebook;
+
+    /** delete old img if img is updated*/
+    // if (oldImgName.trim() !== img.trim()) {
+    //     //delete img 
+    //     const directory = path.join('client/public/images', oldImgName.trim());
+    //     fs.unlink(directory, (err) => {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //     });
+    // }
+
     pool.query(
-        'UPDATE ebooks SET title = $1, description = $2, author = $3, price = $4, date_added = $5 WHERE id = $6',
-        [title, description, author, price, date_added, id],
+        'UPDATE ebooks SET title = $1, description = $2, author = $3, price = $4, img = $5 WHERE id = $6',
+        [title, description, author, price, img.trim(), id],
         (err, result) => {
             if (err) {
                 console.log(err);

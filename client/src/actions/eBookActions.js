@@ -56,6 +56,22 @@ export const deleteEBook = (id, img) => (dispatch) => {
         });
 }
 
+export const updateEBook = (ebook) => (dispatch) => {
+    axios
+        .post('/api/ebooks/edit', {
+            ebook: ebook
+        })
+        .then(res => {
+            dispatch({
+                type: UPDATE_EBOOK,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
 export const setEBooksLoading = () => {
     return {
         type: EBOOKS_LOADING
