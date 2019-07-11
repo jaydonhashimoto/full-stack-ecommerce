@@ -1,3 +1,4 @@
 {
-    "pgURI": "postgresql://postgres:root@localhost:5432/ebookstore"
+    "pgURI": "postgresql://postgres:root@localhost:5432/ebookstore",
+    "jwtSecret": "es_myJwtSecret"
 }
