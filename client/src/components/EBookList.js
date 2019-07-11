@@ -41,8 +41,20 @@ export class EBookList extends Component {
                 <Container>
                     <Row className="mt-4 mb-4">
                         {eBooks.map(({ id, title, description, img, author, price, date_added }) => (
+
                             <Col md="3" lg="3">
-                                <Link style={linkStyle} to='#'>
+                                <Link
+                                    style={linkStyle}
+                                    to={{
+                                        pathname: '/ebook',
+                                        search: `id=${id}`,
+                                        state: {
+                                            ebook: {
+                                                id, title, description, img, author, price, date_added
+                                            }
+                                        }
+                                    }}
+                                >
                                     <Card>
                                         {img !== null ? (
                                             <CardImg top width="100%" src={imgSrc + img} alt={title} />

@@ -5,6 +5,7 @@ import store from './store';
 
 import Home from './components/pages/Home';
 import TopNav from './components/TopNav';
+import ViewEBook from './components/pages/ViewEBook';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -17,6 +18,7 @@ class App extends Component {
           <TopNav />
           <Router>
             <Route exact path='/' component={Home} />
+            <Route path='/ebook' component={ViewEBook} />
           </Router>
         </div>
       </Provider>
