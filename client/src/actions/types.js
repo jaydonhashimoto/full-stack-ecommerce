@@ -3,4 +3,12 @@ export const ADD_EBOOK = 'ADD_EBOOK';
 export const DELETE_EBOOK = 'DELETE_EBOOK';
 export const UPDATE_EBOOK = 'UPDATE_EBOOK';
 export const EBOOKS_LOADING = 'EBOOKS_LOADING';
-
+export const USER_LOADED = 'USER_LOADED';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
