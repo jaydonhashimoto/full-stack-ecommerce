@@ -1,33 +1,83 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
+    Container,
+    Collapse,
+    NavbarToggler,
     Navbar,
     NavbarBrand,
     Nav,
     NavItem,
     NavLink
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import AddEBookModal from './AddEBookModal';
+import RegisterModal from './auth/RegisterModal';
+import LoginModal from './auth/LoginModal';
+import Logout from './auth/Logout';
 
 export class TopNav extends Component {
+    state = {
+        isOpen: false
+    }
+
+    static propTypes = {
+        auth: PropTypes.object.isRequired
+    }
+
+    //toggle hamburger
+    toggle = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
     render() {
+        //get variable from initialState
+        const { isAuthenticated, user } = this.props.auth;
+
+        const authLinks = (
+            <Fragment>
+                <NavItem>
+                    <span className="navbar-text mr-3">
+                        <strong>{user ? `Welcome` : ''}</strong>
+                    </span>
+                </NavItem>
+                <NavItem >
+                    <AddEBookModal />
+                </NavItem>
+                <NavItem>
+                    <NavLink>
+                        <Logout />
+                    </NavLink>
+                </NavItem>
+            </Fragment>
+        );
+
+        const guestLinks = (
+            <Fragment>
+                <NavItem>
+                    <RegisterModal />
+                </NavItem>
+                <NavItem>
+                    <LoginModal />
+                </NavItem>
+            </Fragment>
+        );
+
         return (
             <div>
-                <Navbar color='light' >
-                    <NavbarBrand href='/' style={navLinkStyle}>Fake eBook Store</NavbarBrand>
-                    <Nav className="ml-auto">
-                        <NavItem >
-                            <AddEBookModal />
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href='#' style={navLinkStyle}>Sign In</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href='#' style={navLinkStyle}>Register</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href='#' style={navLinkStyle}>Logout</NavLink>
-                        </NavItem>
-                    </Nav>
+                <Navbar color="dark" dark expand="sm" className="mb-5" >
+                    <Container>
+                        <NavbarBrand href='/' style={navLinkStyle}>
+                            Fake eBook Store
+                        </NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                {isAuthenticated ? authLinks : guestLinks}
+                            </Nav>
+                        </Collapse>
+                    </Container>
                 </Navbar>
             </div>
         )
@@ -39,4 +89,8 @@ const navLinkStyle = {
     color: 'black'
 }
 
-export default TopNav
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, null)(TopNav);
