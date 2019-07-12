@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth');
+const dbConnect = require('../../config/db_connection');
+const pool = dbConnect();
 
 /**
  * @route POST api/auth
@@ -31,7 +33,7 @@ router.post('/', (req, res) => {
                 return res.status(400).json({ msg: 'User Does Not Exist' });
             } else {
                 //validate password
-                bcrypt.compare(password, result.rows.password)
+                bcrypt.compare(password, result.rows[0].password)
                     .then(isMatch => {
                         if (!isMatch) {
                             return res.status(400).json({ msg: 'Invalid Credentials' });
@@ -42,8 +44,8 @@ router.post('/', (req, res) => {
                             { id: result.rows.id },
                             config.get('jwtSecret'),
                             { expiresIn: 3600 },
-                            (err, token) => {
-                                if (err) throw err;
+                            (error, token) => {
+                                if (error) throw error;
                                 res.json({
                                     token,
                                     user: {
@@ -53,6 +55,9 @@ router.post('/', (req, res) => {
                                 });
                             }
                         )
+                    })
+                    .catch(err => {
+                        console.log(err);
                     })
             }
 
@@ -71,6 +76,9 @@ router.get('/user', auth, (req, res) => {
         'SELECT id, email FROM users WHERE id = $1',
         [req.user.id],
         (err, result) => {
+            if (err) {
+                console.log(err);
+            }
             res.json(result.rows)
         }
     )

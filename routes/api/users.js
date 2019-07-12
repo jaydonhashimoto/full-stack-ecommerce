@@ -36,9 +36,9 @@ router.post('/', (req, res) => {
                 return res.status(400).json({ msg: 'User already exists' });
             } else {
                 //create salt and hash
-                bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.genSalt(10, (error, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if (err) throw err;
+                        if (error) throw error;
 
                         //set password to new hash
                         newUser.password = hash;
