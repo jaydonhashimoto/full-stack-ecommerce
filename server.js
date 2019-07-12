@@ -18,6 +18,7 @@ dbConnect();
 //use routes
 app.use('/api/ebooks', require('./routes/api/ebooks'));
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`));
