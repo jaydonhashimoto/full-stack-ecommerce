@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
     Container, Row, Col, Card, CardImg, CardBody,
     CardTitle, CardSubtitle, Button
@@ -18,7 +18,8 @@ export class EBookList extends Component {
         getEBooks: PropTypes.func.isRequired,
         deleteEBook: PropTypes.func.isRequired,
         updateEBook: PropTypes.func.isRequired,
-        eBook: PropTypes.object.isRequired
+        eBook: PropTypes.object.isRequired,
+        auth: PropTypes.object.isRequired
     };
 
     componentDidMount() {
@@ -34,15 +35,19 @@ export class EBookList extends Component {
     }
 
     render() {
+        //get variable from initialState
+        const { isAuthenticated, user } = this.props.auth;
+
         const { eBooks } = this.props.eBook;
+
         let imgSrc = '/images/';
         return (
             <div>
                 <Container>
-                    <Row className="mt-4 mb-4">
+                    <Row>
                         {eBooks.map(({ id, title, description, img, author, price, date_added }) => (
 
-                            <Col md="3" lg="3">
+                            <Col md="3" lg="3" sm="6" xs="6">
                                 <Link
                                     style={linkStyle}
                                     to={{
@@ -55,7 +60,7 @@ export class EBookList extends Component {
                                         }
                                     }}
                                 >
-                                    <Card>
+                                    <Card style={cardStyle}>
                                         {img !== null ? (
                                             <CardImg top width="100%" src={imgSrc + img} alt={title} />
                                         ) : (
@@ -65,15 +70,24 @@ export class EBookList extends Component {
                                         <CardBody>
                                             <CardTitle><b>{title}</b></CardTitle>
                                             <CardSubtitle><small>{author}</small></CardSubtitle>
-                                            <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
-                                            <UpdateEBookModal
-                                                id={id}
-                                                title={title}
-                                                description={description}
-                                                img={img}
-                                                price={price}
-                                                author={author}
-                                            />
+                                            {
+                                                isAuthenticated ? (
+                                                    <Fragment>
+                                                        <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
+                                                        <UpdateEBookModal
+                                                            id={id}
+                                                            title={title}
+                                                            description={description}
+                                                            img={img}
+                                                            price={price}
+                                                            author={author}
+                                                        />
+                                                    </Fragment>
+                                                ) : (
+                                                        null
+                                                    )
+                                            }
+
                                         </CardBody>
                                     </Card>
                                 </Link>
@@ -91,8 +105,13 @@ const linkStyle = {
     color: 'black'
 }
 
+const cardStyle = {
+    height: '100%'
+}
+
 const mapStateToProps = (state) => ({
-    eBook: state.eBook
+    eBook: state.eBook,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, { getEBooks, deleteEBook, updateEBook })(EBookList);
