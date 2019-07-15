@@ -88,7 +88,7 @@ export class EBookList extends Component {
                                                 ) : (null)
                                             }
                                         </CardBody>
-                                    </Card>
+                                    </Card><br />
                                 </Link>
                             </Col>
                         ))}

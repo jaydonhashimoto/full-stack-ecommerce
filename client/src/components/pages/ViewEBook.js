@@ -21,7 +21,7 @@ export class ViewEBook extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            {img !== null ? (
+                            {!img || img.trim() !== 'noimage' ? (
                                 <img style={imgStyle} src={"/images/" + img} />
 
                             ) : (
@@ -30,10 +30,13 @@ export class ViewEBook extends Component {
                             }
                         </Col>
                         <Col>
-                            <h1>{title}</h1>
-                            <small>By: {author}</small>
-                            <p>Uploaded: {date}</p>
-                            <Button color="primary">Purchase for {price}</Button>
+                            <div className="mx-auto text-center">
+                                <h1>{title}</h1>
+                                <small>By: {author}</small>
+                                <p>Uploaded: {date}</p>
+                                <Button color="primary">Purchase for {price}</Button>
+                            </div>
+
                         </Col>
                     </Row>
                     <hr />
