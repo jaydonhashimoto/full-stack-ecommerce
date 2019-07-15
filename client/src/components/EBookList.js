@@ -45,7 +45,7 @@ export class EBookList extends Component {
             <div>
                 <Container>
                     <Row>
-                        {eBooks.map(({ id, title, description, img, author, price, date_added }) => (
+                        {eBooks.map(({ id, title, description, img, author, price, date_added, user_id }) => (
 
                             <Col md="3" lg="3" sm="6" xs="6">
                                 <Link
@@ -55,7 +55,7 @@ export class EBookList extends Component {
                                         search: `id=${id}`,
                                         state: {
                                             ebook: {
-                                                id, title, description, img, author, price, date_added
+                                                id, title, description, img, author, price, date_added, user_id
                                             }
                                         }
                                     }}
@@ -72,22 +72,21 @@ export class EBookList extends Component {
                                             <CardSubtitle><small>{author}</small></CardSubtitle>
                                             {
                                                 isAuthenticated ? (
-                                                    <Fragment>
-                                                        <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
-                                                        <UpdateEBookModal
-                                                            id={id}
-                                                            title={title}
-                                                            description={description}
-                                                            img={img}
-                                                            price={price}
-                                                            author={author}
-                                                        />
-                                                    </Fragment>
-                                                ) : (
-                                                        null
-                                                    )
+                                                    user.id === user_id ? (
+                                                        <Fragment>
+                                                            <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
+                                                            <UpdateEBookModal
+                                                                id={id}
+                                                                title={title}
+                                                                description={description}
+                                                                img={img}
+                                                                price={price}
+                                                                author={author}
+                                                            />
+                                                        </Fragment>
+                                                    ) : (null)
+                                                ) : (null)
                                             }
-
                                         </CardBody>
                                     </Card>
                                 </Link>
@@ -106,7 +105,7 @@ const linkStyle = {
 }
 
 const cardStyle = {
-    height: '100%'
+    // height: '100%'
 }
 
 const mapStateToProps = (state) => ({

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, NavLink, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addEBook } from '../actions/eBookActions';
+import { loadUser } from '../actions/authActions';
 import FileForm from '../components/FileUpload/FileForm';
 import PropTypes from 'prop-types';
 
@@ -14,6 +15,14 @@ export class AddEBookModal extends Component {
             imgName: ''
         };
         this.toggle = this.toggle.bind(this);
+    }
+
+    static propTypes = {
+        loadUser: PropTypes.func.isRequired,
+    };
+
+    componentDidMount() {
+        this.props.loadUser();
     }
 
     toggle() {
@@ -47,9 +56,9 @@ export class AddEBookModal extends Component {
             author: this.state.eBook.author,
             price: this.state.eBook.price,
             date_added: today,
-            img: this.state.imgName
+            img: this.state.imgName,
+            user_id: this.props.user.id
         }
-
         this.props.addEBook(newEBook);
         this.toggle();
     }
@@ -95,4 +104,4 @@ const mapStateToProps = state => ({
     eBook: state.eBook,
 });
 
-export default connect(mapStateToProps, { addEBook })(AddEBookModal);
+export default connect(mapStateToProps, { addEBook, loadUser })(AddEBookModal);

@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 
                         //sign jwt token with payload, secret, expiration, cb
                         jwt.sign(
-                            { id: result.rows.id },
+                            { id: result.rows[0].id },
                             config.get('jwtSecret'),
                             { expiresIn: 3600 },
                             (error, token) => {
@@ -49,8 +49,8 @@ router.post('/', (req, res) => {
                                 res.json({
                                     token,
                                     user: {
-                                        id: result.rows.id,
-                                        email: result.rows.email
+                                        id: result.rows[0].id,
+                                        email: result.rows[0].email
                                     }
                                 });
                             }
@@ -79,7 +79,7 @@ router.get('/user', auth, (req, res) => {
             if (err) {
                 console.log(err);
             }
-            res.json(result.rows)
+            res.json(result.rows[0]);
         }
     )
 })

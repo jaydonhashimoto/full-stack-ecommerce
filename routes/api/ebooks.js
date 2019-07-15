@@ -25,10 +25,10 @@ router.get('/', (req, res) => {
  * @access private
  */
 router.post('/', (req, res) => {
-    const { title, description, author, price, date_added, img } = req.body;
+    const { title, description, author, price, date_added, img, user_id } = req.body;
     pool.query(
-        'INSERT INTO ebooks (title, description, author, price, date_added, img) VALUES ($1, $2, $3, $4, $5, $6)',
-        [title, description, author, price, date_added, img],
+        'INSERT INTO ebooks (title, description, author, price, date_added, img, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        [title, description, author, price, date_added, img, user_id],
         (err, result) => {
             if (err) {
                 console.log(err);

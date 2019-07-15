@@ -25,7 +25,8 @@ export const addEBook = (eBook) => (dispatch) => {
             author: eBook.author,
             img: eBook.img,
             price: eBook.price,
-            date_added: eBook.date_added
+            date_added: eBook.date_added,
+            user_id: eBook.user_id
         })
         .then(res =>
             dispatch({

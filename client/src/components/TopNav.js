@@ -34,16 +34,15 @@ export class TopNav extends Component {
     render() {
         //get variable from initialState
         const { isAuthenticated, user } = this.props.auth;
-
         const authLinks = (
             <Fragment>
                 <NavItem>
                     <span className="navbar-text mr-3">
-                        <strong>{user ? `Welcome` : ''}</strong>
+                        <strong>{user ? `Welcome ${user.email}` : ''}</strong>
                     </span>
                 </NavItem>
                 <NavItem >
-                    <AddEBookModal />
+                    <AddEBookModal user={user} />
                 </NavItem>
                 <NavItem>
                     <NavLink>
