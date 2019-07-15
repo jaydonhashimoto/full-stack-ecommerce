@@ -26,6 +26,11 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     const { title, description, author, price, date_added, img, user_id } = req.body;
+    //null verification
+    if (!title || !description || !author || !price) {
+        return res.status(400).json({ msg: 'Please Enter All Fields' });
+    }
+
     if (img === null || img.trim() === '') {
         pool.query(
             'INSERT INTO ebooks (title, description, author, price, date_added, img, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
@@ -35,7 +40,8 @@ router.post('/', (req, res) => {
                     console.log(err);
                 }
                 res.json({ result });
-            })
+            }
+        )
     } else {
         pool.query(
             'INSERT INTO ebooks (title, description, author, price, date_added, img, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
@@ -45,9 +51,9 @@ router.post('/', (req, res) => {
                     console.log(err);
                 }
                 res.json({ result });
-            })
+            }
+        )
     }
-
 });
 
 /**
@@ -81,7 +87,10 @@ router.post('/uploadimg', (req, res) => {
  */
 router.post('/edit', (req, res) => {
     const { title, description, author, price, id, img, oldImgName } = req.body.ebook;
-
+    //null verification
+    if (!title || !description || !author || !price) {
+        return res.status(400).json({ msg: 'Please Enter All Fields' });
+    }
     /** delete old img if img is updated*/
     // if (oldImgName.trim() !== img.trim()) {
     //     //delete img 
@@ -112,7 +121,7 @@ router.post('/edit', (req, res) => {
 router.post('/delete', (req, res) => {
     const { id, img } = req.body;
 
-    if (img !== null) {
+    if (img.trim() !== 'noimage') {
         //delete img 
         const directory = path.join('client/public/images', img.trim());
         fs.unlink(directory, (err) => {

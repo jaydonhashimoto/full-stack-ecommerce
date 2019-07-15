@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, NavLink, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addEBook } from '../actions/eBookActions';
 import { loadUser } from '../actions/authActions';
@@ -75,19 +75,19 @@ export class AddEBookModal extends Component {
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
                                 <Label for="title">Title</Label>
-                                <Input type="text" name="title" placeholder="eBook Title" onChange={this.onChange} />
+                                <Input type="text" name="title" placeholder="eBook Title" minLength="2" maxLength="50" onChange={this.onChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="description">Description</Label>
-                                <Input type="textarea" name="description" placeholder="eBook Description" onChange={this.onChange} />
+                                <Input type="textarea" name="description" placeholder="eBook Description" minLength="2" maxLength="1000" onChange={this.onChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="author">Author</Label>
-                                <Input type="text" name="author" placeholder="Author" onChange={this.onChange} />
+                                <Input type="text" name="author" placeholder="Author" minLength="2" maxLength="50" onChange={this.onChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="price">Price</Label>
-                                <Input type="text" name="price" placeholder="00.00" onChange={this.onChange} />
+                                <Input type="text" name="price" placeholder="00.00" minLength="1" maxLength="8" onChange={this.onChange} />
                             </FormGroup>
                             <hr />
                             <Button color="primary">Add</Button>{' '}
