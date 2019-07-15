@@ -26,15 +26,28 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     const { title, description, author, price, date_added, img, user_id } = req.body;
-    pool.query(
-        'INSERT INTO ebooks (title, description, author, price, date_added, img, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-        [title, description, author, price, date_added, img, user_id],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            }
-            res.json({ result });
-        })
+    if (img === null || img.trim() === '') {
+        pool.query(
+            'INSERT INTO ebooks (title, description, author, price, date_added, img, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            [title, description, author, price, date_added, 'noimage', user_id],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.json({ result });
+            })
+    } else {
+        pool.query(
+            'INSERT INTO ebooks (title, description, author, price, date_added, img, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            [title, description, author, price, date_added, img, user_id],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.json({ result });
+            })
+    }
+
 });
 
 /**

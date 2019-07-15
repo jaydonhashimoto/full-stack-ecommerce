@@ -61,7 +61,7 @@ export class EBookList extends Component {
                                     }}
                                 >
                                     <Card style={cardStyle}>
-                                        {img !== null ? (
+                                        {!img || img.trim() !== 'noimage' ? (
                                             <CardImg top width="100%" src={imgSrc + img} alt={title} />
                                         ) : (
                                                 <CardImg top width="100%" src={imgSrc + 'notfound.png'} alt={title} />
