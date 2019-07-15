@@ -75,11 +75,11 @@ export class AddEBookModal extends Component {
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
                                 <Label for="title">Title</Label>
-                                <Input type="text" name="title" placeholder="eBook Title" minLength="2" maxLength="50" onChange={this.onChange} />
+                                <Input type="text" name="title" placeholder="eBook Title" minLength="2" maxLength="100" onChange={this.onChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="description">Description</Label>
-                                <Input type="textarea" name="description" placeholder="eBook Description" minLength="2" maxLength="1000" onChange={this.onChange} />
+                                <Input type="textarea" name="description" placeholder="eBook Description" minLength="2" maxLength="2000" onChange={this.onChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="author">Author</Label>

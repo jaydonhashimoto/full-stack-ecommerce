@@ -48,48 +48,48 @@ export class EBookList extends Component {
                         {eBooks.map(({ id, title, description, img, author, price, date_added, user_id }) => (
 
                             <Col md="3" lg="3" sm="6" xs="6">
-                                <Link
-                                    style={linkStyle}
-                                    to={{
-                                        pathname: '/ebook',
-                                        search: `id=${id}`,
-                                        state: {
-                                            ebook: {
-                                                id, title, description, img, author, price, date_added, user_id
+                                <Card style={cardStyle}>
+                                    <Link
+                                        style={linkStyle}
+                                        to={{
+                                            pathname: '/ebook',
+                                            search: `id=${id}`,
+                                            state: {
+                                                ebook: {
+                                                    id, title, description, img, author, price, date_added, user_id
+                                                }
                                             }
-                                        }
-                                    }}
-                                >
-                                    <Card style={cardStyle}>
+                                        }}
+                                    >
                                         {!img || img.trim() !== 'noimage' ? (
                                             <CardImg top width="100%" src={imgSrc + img} alt={title} />
                                         ) : (
                                                 <CardImg top width="100%" src={imgSrc + 'notfound.png'} alt={title} />
                                             )
                                         }
-                                        <CardBody>
-                                            <CardTitle><b>{title}</b></CardTitle>
-                                            <CardSubtitle><small>{author}</small></CardSubtitle>
-                                            {
-                                                isAuthenticated ? (
-                                                    user.id === user_id ? (
-                                                        <Fragment>
-                                                            <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
-                                                            <UpdateEBookModal
-                                                                id={id}
-                                                                title={title}
-                                                                description={description}
-                                                                img={img}
-                                                                price={price}
-                                                                author={author}
-                                                            />
-                                                        </Fragment>
-                                                    ) : (null)
+                                    </Link>
+                                    <CardBody>
+                                        <CardTitle><b>{title}</b></CardTitle>
+                                        <CardSubtitle><small>{author}</small></CardSubtitle>
+                                        {
+                                            isAuthenticated ? (
+                                                user.id === user_id ? (
+                                                    <Fragment>
+                                                        <Button color="danger" onClick={() => this.deleteEBook(id, img)}>Delete</Button>
+                                                        <UpdateEBookModal
+                                                            id={id}
+                                                            title={title}
+                                                            description={description}
+                                                            img={img}
+                                                            price={price}
+                                                            author={author}
+                                                        />
+                                                    </Fragment>
                                                 ) : (null)
-                                            }
-                                        </CardBody>
-                                    </Card><br />
-                                </Link>
+                                            ) : (null)
+                                        }
+                                    </CardBody>
+                                </Card><br />
                             </Col>
                         ))}
                     </Row>
