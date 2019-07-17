@@ -20,7 +20,8 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^7.11.0"
+    "pg": "^7.11.0",
+    "stripe": "^7.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

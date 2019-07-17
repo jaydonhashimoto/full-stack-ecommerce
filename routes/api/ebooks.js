@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const router = express.Router();
+const keys = require('../../config/keys');
+const stripe = require('stripe')(keys.stripeSecretKey);
 const dbConnect = require('../../config/db_connection');
 const pool = dbConnect();
 
@@ -142,5 +144,50 @@ router.post('/delete', (req, res) => {
         }
     )
 });
+
+/**
+ * @route GET api/ebooks/key
+ * @desc get stripe publish key
+ * @access public
+ */
+router.get('/key', (req, res) => {
+    res.json({
+        stripePublishableKey: keys.stripePublishableKey
+    })
+})
+
+/**
+ * @route POST api/ebooks/charge
+ * @desc receive order info and process purchase
+ * @access public
+ */
+router.post('/charge', (req, res) => {
+    //define amount
+    const price = req.body.price;
+    const nonIntPrice = price.replace('$', '');
+    const amount = Math.round(nonIntPrice * 100);
+    //create customer **FIX LATER
+    // stripe.customers.create({
+    //     email: req.body.email,
+    //     name: req.body.name,
+    //     source: req.body.token
+    // })
+    //     //charge customer
+    //     .then(customer => stripe.charges.create({
+    //         amount: amount,
+    //         description: 'Cool Ebook',
+    //         currency: 'usd',
+    //         customer: customer.id
+    //     }))
+    stripe.charges.create({
+        amount: amount,
+        description: `Purchase of a copy of ${req.body.title} from Fake eBook Store`,
+        currency: 'usd',
+        source: req.body.token.id
+
+    })
+    //send success msg
+    res.json({ msg: 'Transaction Complete!' });
+})
 
 module.exports = router;

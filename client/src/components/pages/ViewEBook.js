@@ -3,6 +3,7 @@ import {
     Container, Row, Col,
     Button,
 } from 'reactstrap';
+import StripeCheckoutForm from '../payment/StripeCheckoutForm';
 
 export class ViewEBook extends Component {
     state = {
@@ -34,9 +35,8 @@ export class ViewEBook extends Component {
                                 <h1>{title}</h1>
                                 <small>By: {author}</small>
                                 <p>Uploaded: {date}</p>
-                                <Button color="primary">Purchase for {price}</Button>
+                                <StripeCheckoutForm ebook={this.state.ebook} />
                             </div>
-
                         </Col>
                     </Row>
                     <hr />
