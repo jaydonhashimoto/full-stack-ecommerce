@@ -4,7 +4,14 @@ const connString = config.get('pgURI');
 
 //connect to postgres db
 function dbConnect() {
-    //connect to postgres
+    //production
+    if (process.env.NODE_ENV === 'production') {
+        const pool = new Pool({
+            connectionString: process.env.DB_CONNECTION_STRING
+        });
+        return pool;
+    }
+    //development
     const pool = new Pool({
         connectionString: connString
     });
