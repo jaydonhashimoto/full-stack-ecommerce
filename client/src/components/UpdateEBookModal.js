@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateEBook } from '../actions/eBookActions';
 import FileForm from '../components/FileUpload/FileForm';
-import PropTypes from 'prop-types';
 
 export class UpdateEBookModal extends Component {
     constructor(props) {
@@ -68,7 +67,7 @@ export class UpdateEBookModal extends Component {
     }
 
     render() {
-        const { title, id, description, author, price, img } = this.state.eBook;
+        const { title, description, author, price, img } = this.state.eBook;
         return (
             <div>
                 <Button color="warning" onClick={this.toggle}>Update eBook</Button>

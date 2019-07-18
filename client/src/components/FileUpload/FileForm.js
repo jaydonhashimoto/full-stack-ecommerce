@@ -14,7 +14,7 @@ const FileForm = ({ setImgName, imgName }) => {
         if (imgName) {
             setFilename(imgName);
         }
-    })
+    }, [imgName])
 
     const onChange = e => {
         //file upload allows for multiple files

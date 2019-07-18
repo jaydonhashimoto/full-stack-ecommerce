@@ -6,8 +6,7 @@ import {
     Navbar,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink
+    NavItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -45,9 +44,7 @@ export class TopNav extends Component {
                     <AddEBookModal user={user} />
                 </NavItem>
                 <NavItem>
-                    <NavLink>
-                        <Logout />
-                    </NavLink>
+                    <Logout />
                 </NavItem>
             </Fragment>
         );

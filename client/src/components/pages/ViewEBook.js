@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Container, Row, Col,
-    Button,
+    Container, Row, Col
 } from 'reactstrap';
 import StripeCheckoutForm from '../payment/StripeCheckoutForm';
 
@@ -10,7 +9,7 @@ export class ViewEBook extends Component {
         ebook: this.props.location.state.ebook,
     }
     render() {
-        const { title, id, description, author, price, img, date_added } = this.state.ebook;
+        const { title, description, author, price, img, date_added } = this.state.ebook;
         const unformatedDate = new Date(date_added);
         const date = new Intl.DateTimeFormat('en-US', {
             year: 'numeric',
@@ -23,7 +22,7 @@ export class ViewEBook extends Component {
                     <Row>
                         <Col>
                             {!img || img.trim() !== 'noimage' ? (
-                                <img style={imgStyle} src={"/images/" + img} />
+                                <img style={imgStyle} src={"/images/" + img} alt="cover img" />
 
                             ) : (
                                     <img width="100%" src={'/images/notfound.png'} alt={title} />
@@ -35,6 +34,7 @@ export class ViewEBook extends Component {
                                 <h1>{title}</h1>
                                 <small>By: {author}</small>
                                 <p>Uploaded: {date}</p>
+                                <p>{price}</p>
                                 <StripeCheckoutForm ebook={this.state.ebook} />
                             </div>
                         </Col>

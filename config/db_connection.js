@@ -7,7 +7,7 @@ function dbConnect() {
     //production
     if (process.env.NODE_ENV === 'production') {
         const pool = new Pool({
-            connectionString: process.env.DB_CONNECTION_STRING
+            connectionString: process.env.DATABASE_URL
         });
         return pool;
     }

@@ -16,7 +16,8 @@ export class PaymentForm extends Component {
             email: '',
             price: this.props.price,
             ebookTitle: this.props.title,
-            errorMessage: ''
+            errorMessage: '',
+            purchased: false
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -63,8 +64,9 @@ export class PaymentForm extends Component {
                     .catch(err => {
                         console.log(err)
                     })
-            });
-        this.toggle();
+            }
+            );
+        this.setState({ purchased: !this.state.purchased });
     }
 
     render() {
@@ -75,6 +77,10 @@ export class PaymentForm extends Component {
                     <ModalHeader>Payment</ModalHeader>
                     {this.state.errorMessage ? (
                         <Alert color="danger">{this.state.errorMessage}</Alert>
+                    ) : null
+                    }
+                    {this.state.purchased ? (
+                        <Alert color="primary">Thank you for purchasing this eBook!</Alert>
                     ) : null
                     }
                     <ModalBody>
@@ -89,6 +95,7 @@ export class PaymentForm extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <CardElement className="border border-dark" />
+                                <small>Enter Test Data: 4242 4242 4242 4242 | 04/24 | 242 | 42424</small>
                             </FormGroup><hr />
                             <Button color="primary">Make Payment</Button>{' '}
                             <Button color="secondary" onClick={this.toggle}>Cancel</Button>

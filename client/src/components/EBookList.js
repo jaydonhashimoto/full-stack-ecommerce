@@ -46,8 +46,7 @@ export class EBookList extends Component {
                 <Container>
                     <Row>
                         {eBooks.map(({ id, title, description, img, author, price, date_added, user_id }) => (
-
-                            <Col md="3" lg="3" sm="6" xs="6">
+                            <Col md="3" lg="3" sm="6" xs="6" key={id}>
                                 <Card style={cardStyle}>
                                     <Link
                                         style={linkStyle}
