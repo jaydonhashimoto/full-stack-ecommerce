@@ -15,6 +15,7 @@ function dbConnect() {
     const pool = new Pool({
         connectionString: connString
     });
+    console.log("DEVELOPMENT DB CONNECTED");
     return pool;
 }
 
