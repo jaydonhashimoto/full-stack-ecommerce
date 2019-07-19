@@ -17,6 +17,9 @@ router.get('/', (req, res) => {
         if (err) {
             console.log(err);
         }
+        if (result.rowCount === 0) {
+            return res.json({ msg: "No eBooks added" })
+        }
         res.json(result.rows);
     })
 });
