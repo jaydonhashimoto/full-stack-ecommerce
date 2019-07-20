@@ -5,6 +5,7 @@ import store from './store';
 
 import Home from './components/pages/Home';
 import TopNav from './components/TopNav';
+import Footer from './components/Footer';
 import ViewEBook from './components/pages/ViewEBook';
 import { loadUser } from './actions/authActions';
 
@@ -18,12 +19,13 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App" >
+        <div className="App">
           <TopNav />
           <Router>
-            <Route exact path='/' component={Home} />
-            <Route path='/ebook' component={ViewEBook} />
+            <Route exact path="/" component={Home} />
+            <Route path="/ebook" component={ViewEBook} />
           </Router>
+          <Footer />
         </div>
       </Provider>
     );
