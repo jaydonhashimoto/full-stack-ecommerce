@@ -1,5 +1,6 @@
 {
   "name": "full_stack_ecommerce",
+  "homepage": "https://quiet-reaches-13881.herokuapp.com/",
   "version": "1.0.0",
   "description": "Full Stack ecommerce app",
   "main": "server.js",
