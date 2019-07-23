@@ -14,6 +14,7 @@ import AddEBookModal from './AddEBookModal';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
+import Dashboard from './pages/Dashboard';
 
 export class TopNav extends Component {
   state = {
@@ -39,6 +40,9 @@ export class TopNav extends Component {
           <span className="navbar-text mr-3">
             <strong>{user ? `Welcome ${user.email}` : ''}</strong>
           </span>
+        </NavItem>
+        <NavItem>
+          <Dashboard user={user} />
         </NavItem>
         <NavItem>
           <AddEBookModal user={user} />
