@@ -14,6 +14,9 @@ import { Link } from 'react-router-dom';
 import UpdateEBookModal from '../components/UpdateEBookModal';
 
 export class EBooks extends Component {
+  state = {
+    search: ''
+  };
   deleteEBook = (id, img) => {
     this.props.deleteEBook(id, img);
   };
@@ -21,14 +24,37 @@ export class EBooks extends Component {
   updateEBook = ebook => {
     this.props.updateEBook(ebook);
   };
+
+  filterSearch = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
     let imgSrc = '/images/';
+    let filteredTitles = this.props.ebooks.filter(ebook => {
+      return (
+        //-1 === any value that is not available, else return found results
+        ebook.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
+        -1
+      );
+    });
+
     const { isAuthenticated, user } = this.props;
     return (
       <div>
         <Container>
           <Row>
-            {this.props.ebooks.map(
+            <Col>
+              <input
+                type="text"
+                onChange={this.filterSearch}
+                placeholder="Seach Titles"
+                name="search"
+              />
+            </Col>
+          </Row>
+          <Row>
+            {filteredTitles.map(
               ({
                 id,
                 title,
