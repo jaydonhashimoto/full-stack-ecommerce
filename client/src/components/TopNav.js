@@ -6,15 +6,16 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  NavLink
 } from 'reactstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddEBookModal from './AddEBookModal';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
-import Dashboard from './pages/Dashboard';
 
 export class TopNav extends Component {
   state = {
@@ -42,10 +43,19 @@ export class TopNav extends Component {
           </span>
         </NavItem>
         <NavItem>
-          <Dashboard user={user} />
+          <AddEBookModal user={user} />
         </NavItem>
         <NavItem>
-          <AddEBookModal user={user} />
+          <NavLink>
+            <Link
+              style={navLinkStyle}
+              to={{
+                pathname: '/dashboard'
+              }}
+            >
+              Dashboard
+            </Link>
+          </NavLink>
         </NavItem>
         <NavItem>
           <Logout />

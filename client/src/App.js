@@ -7,6 +7,7 @@ import Home from './components/pages/Home';
 import TopNav from './components/TopNav';
 import Footer from './components/Footer';
 import ViewEBook from './components/pages/ViewEBook';
+import Dashboard from './components/pages/Dashboard';
 import { loadUser } from './actions/authActions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,10 +21,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <TopNav />
           <Router>
+            <TopNav />
             <Route exact path="/" component={Home} />
             <Route path="/ebook" component={ViewEBook} />
+            <Route path="/dashboard" component={Dashboard} />
           </Router>
           <Footer />
         </div>
