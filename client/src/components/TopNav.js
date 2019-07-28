@@ -53,7 +53,7 @@ export class TopNav extends Component {
                 pathname: '/dashboard'
               }}
             >
-              Dashboard
+              <i className="fas fa-user" /> Dashboard
             </Link>
           </NavLink>
         </NavItem>
@@ -84,7 +84,7 @@ export class TopNav extends Component {
         >
           <Container>
             <NavbarBrand href="/" style={navLinkStyle}>
-              Mock eBook Store
+              <i className="fas fa-book" /> Mock eBook Store
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>

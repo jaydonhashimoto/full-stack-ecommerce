@@ -8,7 +8,8 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button
+  Button,
+  Input
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import UpdateEBookModal from '../components/UpdateEBookModal';
@@ -45,11 +46,12 @@ export class EBooks extends Component {
         <Container>
           <Row>
             <Col>
-              <input
+              <Input
                 type="text"
                 onChange={this.filterSearch}
                 placeholder="Seach Titles"
                 name="search"
+                className="mb-3"
               />
             </Col>
           </Row>

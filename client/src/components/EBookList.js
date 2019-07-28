@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getEBooks, deleteEBook, updateEBook } from '../actions/eBookActions';
 import Pagination from './Pagination';
@@ -50,13 +51,17 @@ export class EBookList extends Component {
           deleteEBook={this.deleteEBook}
           updateEBook={this.updateEBook}
         />
-        <div>
-          <Pagination
-            itemsPerPage={this.state.itemsPerPage}
-            totalItems={eBooks.length}
-            paginate={paginate}
-          />
-        </div>
+        <Container>
+          <Row>
+            <Col>
+              <Pagination
+                itemsPerPage={this.state.itemsPerPage}
+                totalItems={eBooks.length}
+                paginate={paginate}
+              />
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
