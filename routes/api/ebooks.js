@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
  * @desc get all ebooks posted by uploader
  * @access private
  */
-router.post('/:id', (req, res) => {
+router.post('/id/:id', (req, res) => {
   pool.query(
     'SELECT * FROM ebooks WHERE user_id=$1',
     [req.params.id],
@@ -200,10 +200,10 @@ router.get('/key', (req, res) => {
  */
 router.post('/charge', (req, res) => {
   //define amount
-  const price = req.body.price;
-  const nonIntPrice = price.replace('$', '');
-  const amount = Math.round(nonIntPrice * 100);
-  //create customer **FIX LATER
+  let price = req.body.price;
+  let nonIntPrice = price.replace('$', '');
+  let amount = Math.round(nonIntPrice * 100);
+  // create customer **FIX LATER
   // stripe.customers.create({
   //     email: req.body.email,
   //     name: req.body.name,
@@ -224,7 +224,7 @@ router.post('/charge', (req, res) => {
     currency: 'usd',
     source: req.body.token.id
   });
-  //send success msg
+  // send success msg
   res.json({ msg: 'Transaction Complete!' });
 });
 

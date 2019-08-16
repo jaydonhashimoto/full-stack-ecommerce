@@ -19,7 +19,7 @@ export class Dashboard extends Component {
     // console.log(user.id);
     if (isAuthenticated) {
       axios
-        .post(`/api/ebooks/${user.id}`)
+        .post(`/api/ebooks/id/${user.id}`)
         .then(res => {
           this.setState({ ebooks: res.data });
         })

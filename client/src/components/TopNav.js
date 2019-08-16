@@ -46,16 +46,14 @@ export class TopNav extends Component {
           <AddEBookModal user={user} />
         </NavItem>
         <NavItem>
-          <NavLink>
-            <Link
-              style={navLinkStyle}
-              to={{
-                pathname: '/dashboard'
-              }}
-            >
-              <i className="fas fa-user" /> Dashboard
-            </Link>
-          </NavLink>
+          <Link
+            style={navLinkStyle}
+            to={{
+              pathname: '/dashboard'
+            }}
+          >
+            <i className="fas fa-user" /> Dashboard
+          </Link>
         </NavItem>
         <NavItem>
           <Logout />
