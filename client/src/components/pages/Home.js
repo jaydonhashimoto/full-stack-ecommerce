@@ -5,7 +5,6 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <p>File uploading is currently not working</p>
         <EBookList />
       </div>
     );
