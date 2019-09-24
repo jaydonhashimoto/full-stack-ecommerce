@@ -6,7 +6,8 @@
 <p align="center">
     This project is a mock ebook store that utilizes user authentication and a payment system.
     
-    TODO: Implement Amazon S3 bucket (file uploading is kinda broken)
+    TODO: Implement Amazon S3 bucket (file uploading is kinda broken),
+    Implement S3 delete file
 </p>
 
 ---
