@@ -4,6 +4,9 @@ const path = require('path');
 const router = express.Router();
 const keys = require('../../config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
+const AWS = require('aws-sdk');
+const s3AKey = keys.s3AccessKey;
+const s3SAKey = keys.s3SecretAccessKey;
 const dbConnect = require('../../config/db_connection');
 const pool = dbConnect();
 
@@ -102,16 +105,43 @@ router.post('/uploadimg', (req, res) => {
   //get file
   const file = req.files.file;
 
-  //move file to directory
-  file.mv(`${__dirname}/../../client/public/images/${file.name}`, err => {
-    //if there is an error, send 500 with error
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err);
-    }
-    //else send 200 with file name and path
-    res.json({ fileName: file.name, filePath: `/images/${file.name}` });
+  //upload to aws s3
+  const s3 = new AWS.S3({
+    credentials: {
+      accessKeyId: s3AKey,
+      secretAccessKey: s3SAKey
+    },
+    apiVersion: '2006-03-01'
   });
+
+  //specify params
+  const uploadParams = {
+    Bucket: 'jaydon-hashimoto-test-bucket',
+    Key: '',
+    Body: '',
+    ACL: 'public-read'
+  };
+
+  //set body and key
+  uploadParams.Body = file.data;
+  uploadParams.Key = file.name;
+
+  // //upload to s3 bucket
+  s3.upload(uploadParams, (err, data) => {
+    if (err) console.log('error', err);
+    if (data) console.log('upload success', data.Location);
+  });
+
+  // //move file to directory
+  // file.mv(`${__dirname}/../../client/public/images/${file.name}`, err => {
+  //   //if there is an error, send 500 with error
+  //   if (err) {
+  //     console.error(err);
+  //     return res.status(500).send(err);
+  //   }
+  //   //else send 200 with file name and path
+  //   res.json({ fileName: file.name, filePath: `/images/${file.name}` });
+  // });
 });
 
 /**
@@ -218,9 +248,7 @@ router.post('/charge', (req, res) => {
   //     }))
   stripe.charges.create({
     amount: amount,
-    description: `Purchase of a copy of ${
-      req.body.title
-    } from Fake eBook Store`,
+    description: `Purchase of a copy of ${req.body.title} from Fake eBook Store`,
     currency: 'usd',
     source: req.body.token.id
   });

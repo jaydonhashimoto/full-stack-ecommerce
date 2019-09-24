@@ -31,7 +31,9 @@ export class EBooks extends Component {
   };
 
   render() {
-    let imgSrc = '/images/';
+    // let imgSrc = '/images/';
+    let imgSrc =
+      'https://jaydon-hashimoto-test-bucket.s3-us-west-1.amazonaws.com/';
     let filteredTitles = this.props.ebooks.filter(ebook => {
       return (
         //-1 === any value that is not available, else return found results
